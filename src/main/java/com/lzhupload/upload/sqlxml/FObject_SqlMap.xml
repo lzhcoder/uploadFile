@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="fobject">
+	<typeAlias alias="FObject" type="com.lzhupload.upload.model.FObject" />
+	<resultMap id="FObjectRB" class="FObject">
+		<result column="id" property="id" />
+		<result column="vid" property="vid" />
+		<result column="registerDate" property="registerDate" />
+		<result column="uploadDate" property="uploadDate" />
+		<result column="relativePath" property="relativePath" />
+		<result column="fullPath" property="fullPath" />
+		<result column="extName" property="extName" />
+		<result column="origin" property="origin" />
+		<result column="del" property="del" />
+		<result column="fileSize" property="fileSize" />
+		<result column="note" property="note" />
+	</resultMap>
+	<select id="query" parameterClass="FObject" resultMap="FObjectRB">
+		select
+		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
+		from tmk_fileinfo
+	</select>
+	<insert id="add" parameterClass="FObject">
+		insert into
+		tmk_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note)
+		values(#vid#,now(),now(),#relativePath#,#fullPath#,#extName#,#origin#,#del#,#fileSize#,#note#)
+	</insert>
+	<update id="modify" parameterClass="FObject">
+		update tmk_fileinfo set
+		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
+		where Id=#id#
+	</update>
+	<delete id="remove" parameterClass="FObject">
+		delete from tmk_fileinfo where
+		Id=#id#
+	</delete>
+
+
+	<select id="queryForId" parameterClass="FObject" resultClass="FObject" >
+		select
+		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
+		from tmk_fileinfo
+		where (del &lt;&gt; 1 or del is null) and id=#id#
+	</select>
+	<insert id="addForReg" parameterClass="FObject">
+		insert into
+		tmk_fileinfo(Registerdate,del,Filesize)
+		values(now(),0,0)
+		<selectKey resultClass="java.lang.Long" keyProperty="id">
+	    	SELECT LAST_INSERT_ID() AS id from tmk_fileinfo limit 1
+		</selectKey>
+	</insert>
+	<update id="modifyForUpload" parameterClass="FObject">
+		update tmk_fileinfo set
+		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
+		where Id=#id#
+	</update>
+
+</sqlMap>
