@@ -133,7 +133,16 @@
 			<version>${jdbc.driver.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
+    <dependency>
+	      <groupId>com</groupId>
+	      <artifactId>fjxhx-adapter</artifactId>
+	      <version>1.0</version>
+    </dependency>
+    <dependency>
+	      <groupId>com</groupId>
+	      <artifactId>fjxhx-common</artifactId>
+	      <version>1.0</version>
+    </dependency>
 	</dependencies>
 
 	<build>
