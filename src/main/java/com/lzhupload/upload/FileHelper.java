@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lzhupload.upload.model.FObject;
 
 public interface FileHelper {
+	
 	public boolean uploadVerify(HttpServletRequest request,
 			HttpServletResponse response, FObject fobject);
 
