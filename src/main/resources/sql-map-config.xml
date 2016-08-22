@@ -12,10 +12,14 @@
 		<dataSource type="DBCP">
 			<property name="JDBC.Driver" value="com.mysql.jdbc.Driver" />
 
-            <property name="JDBC.ConnectionURL" value="jdbc:mysql://botannrds.mysql.rds.aliyuncs.com/botann_marketing_plt?characterEncoding=utf-8" />
+<!--             <property name="JDBC.ConnectionURL" value="jdbc:mysql://botannrds.mysql.rds.aliyuncs.com/botann_marketing_plt?characterEncoding=utf-8" />
 			<property name="JDBC.Username" value="botann2015" />
-			<property name="JDBC.Password" value="BTKJ0307" />
+			<property name="JDBC.Password" value="BTKJ0307" /> -->
 
+
+            <property name="JDBC.ConnectionURL" value="jdbc:mysql://botannrds.mysql.rds.aliyuncs.com/botanndesign?characterEncoding=utf-8" />
+			<property name="JDBC.Username" value="botann0616" />
+			<property name="JDBC.Password" value="btkj0623" />
 
 			<property name="Driver.defaultAutoCommit" value="true" />
 			<property name="Driver.defaultTransactionIsolation" value="NONE" />

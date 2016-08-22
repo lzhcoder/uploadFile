@@ -105,6 +105,7 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 		String uploadPath = UploadInitImpl.getUpload()
 				.getProperty("uploadPath");
 		String fileName = fobject.getFileName();
+ 
 		String fullPath = uploadPath + fobject.getFullPath();
 		try {
 			// 添加头信息，为"文件下载/另存为"对话框指定默认文件名

@@ -18,20 +18,20 @@
 	<select id="query" parameterClass="FObject" resultMap="FObjectRB">
 		select
 		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
-		from tmk_fileinfo
+		from t_fileinfo
 	</select>
 	<insert id="add" parameterClass="FObject">
 		insert into
-		tmk_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note)
+		t_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note)
 		values(#vid#,now(),now(),#relativePath#,#fullPath#,#extName#,#origin#,#del#,#fileSize#,#note#)
 	</insert>
 	<update id="modify" parameterClass="FObject">
-		update tmk_fileinfo set
+		update t_fileinfo set
 		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
 		where Id=#id#
 	</update>
 	<delete id="remove" parameterClass="FObject">
-		delete from tmk_fileinfo where
+		delete from t_fileinfo where
 		Id=#id#
 	</delete>
 
@@ -39,19 +39,19 @@
 	<select id="queryForId" parameterClass="FObject" resultClass="FObject" >
 		select
 		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
-		from tmk_fileinfo
+		from t_fileinfo
 		where (del &lt;&gt; 1 or del is null) and id=#id#
 	</select>
 	<insert id="addForReg" parameterClass="FObject">
 		insert into
-		tmk_fileinfo(Registerdate,del,Filesize)
+		t_fileinfo(Registerdate,del,Filesize)
 		values(now(),0,0)
 		<selectKey resultClass="java.lang.Long" keyProperty="id">
-	    	SELECT LAST_INSERT_ID() AS id from tmk_fileinfo limit 1
+	    	SELECT LAST_INSERT_ID() AS id from t_fileinfo limit 1
 		</selectKey>
 	</insert>
 	<update id="modifyForUpload" parameterClass="FObject">
-		update tmk_fileinfo set
+		update t_fileinfo set
 		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
 		where Id=#id#
 	</update>

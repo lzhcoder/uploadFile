@@ -10,6 +10,8 @@ import com.ibatis.dao.client.template.SqlMapDaoTemplate;
 
  
 
+ 
+
 public class BaseDaoImpl extends SqlMapDaoTemplate implements BaseDao {
 
 	public BaseDaoImpl(DaoManager daoManager) {

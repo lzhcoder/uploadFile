@@ -24,6 +24,8 @@ public class FObject {
 
 	private String fullPath;
 
+	private String userName;
+	
 	public Long getId() {
 		return id;
 	}
@@ -142,6 +144,14 @@ public class FObject {
 
 	public void setFullPath(String fullPath) {
 		this.fullPath = fullPath;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

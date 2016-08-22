@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.lzhupload.common.ibatis.BaseDao;
@@ -147,6 +148,18 @@ public class FObjectHelperImpl implements FObjectHelper {
 		fobject.setOrigin(origin);
 		// 设置其它字段
 		try {
+			String userName=(String) request.getAttribute("userName");
+			if(!StringUtils.isEmpty(userName)){
+				
+				fobject.setRelativePath(userName+"/");
+				
+			}else if(!StringUtils.isEmpty(request.getParameter("userName"))){
+				
+				userName=  request.getParameter("userName");
+				fobject.setRelativePath(userName+"/");
+			
+			}
+			
 			createVid(fobject);
 		} catch (Exception e) {
 			httpHelper.doError(response, "16", null);
@@ -175,7 +188,13 @@ public class FObjectHelperImpl implements FObjectHelper {
 		fobject.setVid(AESEncryptor.encryptKey(vids));
 		String p = String.format(pathFormat, fobject.getOrigin(), cal
 				.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1);
-		fobject.setRelativePath(p);
+		
+		if(!StringUtils.isEmpty(fobject.getRelativePath())){
+			fobject.setRelativePath(fobject.getRelativePath()+p);
+		}else{
+			fobject.setRelativePath(p);
+		}
+		
 		fobject.setFileName(fobject.getId() + "." + fobject.getExtName());
 	}
 
