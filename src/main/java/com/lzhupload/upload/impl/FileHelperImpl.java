@@ -2,6 +2,8 @@
 package com.lzhupload.upload.impl;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,16 +18,22 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.lzhupload.common.ibatis.BaseDao;
+import com.lzhupload.common.ibatis.DaoUtil;
 import com.lzhupload.upload.FileHelper;
 import com.lzhupload.upload.HttpHelper;
 import com.lzhupload.upload.model.FObject;
 
 public class FileHelperImpl implements FileHelper {
+	
 	private static String uploadPath = null;// 上传文件的目录
 	private static String tempPath = null; // 临时文件目录
 	private static File tempPathFile = null;
 	private static int sizeThreshold = 1024;
 	private static int sizeMax = 4194304;
+	
+ 
+	
 	// 初始化
 	static {
 		sizeMax = Integer.parseInt(UploadInitImpl.getUpload().getProperty(
@@ -161,4 +169,7 @@ public class FileHelperImpl implements FileHelper {
 		fobject.setFileSize(fileItem.getSize());
 		return fileItem.getSize() < sizeMax;
 	}
+	
+	
+	
 }

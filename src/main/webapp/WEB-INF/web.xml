@@ -92,8 +92,17 @@
     <servlet-class>com.lzhupload.upload.servlet.DownloadFileServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <servlet>
+    <servlet-name>ReplaceFileServlet</servlet-name>
+    <servlet-class>com.lzhupload.upload.servlet.ReplaceFileServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>DownloadFileServlet</servlet-name>
     <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReplaceFileServlet</servlet-name>
+    <url-pattern>/replaceFile</url-pattern>
   </servlet-mapping>
 </web-app>

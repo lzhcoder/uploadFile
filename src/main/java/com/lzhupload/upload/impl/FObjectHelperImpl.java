@@ -1,5 +1,8 @@
 package com.lzhupload.upload.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,14 +26,12 @@ public class FObjectHelperImpl implements FObjectHelper {
 	// 须要设置　origin来源,dbdate时间,sequence数据库序列 例如：A0-2013-4-100012-jpg
 	private static String vidFormat = "%s/%s/%s/%s.%s";
 	private static String pathFormat = "%s/%s/%s/";
-	private static BaseDao dao = (BaseDao) DaoUtil.getDaoManager().getDao(
-			BaseDao.class);
+	private static BaseDao dao = (BaseDao) DaoUtil.getDaoManager().getDao(BaseDao.class);
 	HttpHelper httpHelper = null;
 	private static int idCount = 10;
 	static {
 		try {
-			idCount = Integer.valueOf(UploadInitImpl.getUpload().getProperty(
-					"idCount"));
+			idCount = Integer.valueOf(UploadInitImpl.getUpload().getProperty("idCount"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -250,4 +251,35 @@ public class FObjectHelperImpl implements FObjectHelper {
 
 		return true;
 	}
+	
+	public boolean replace(HttpServletRequest request,
+			HttpServletResponse response, FObject fobject) {
+
+
+		try {
+			fobject = (FObject) dao.selectObject("fobject.queryForId",fobject);
+			
+			 String uploadPath = UploadInitImpl.getUpload().getProperty("uploadPath");
+			 String fileFullPath = uploadPath	+ fobject.getFullPath();
+		     InputStream input = request.getInputStream();   
+ 
+		     FileOutputStream fos = new FileOutputStream(fileFullPath);  
+
+		     int size = 0;  
+		     byte[] buffer = new byte[1024];  
+		     while ((size = input.read(buffer,0,1024)) != -1) {  
+		         fos.write(buffer, 0, size);  
+		     }  
+		     fos.close();  
+		     input.close();  
+		     return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+
+	}
+    
 }

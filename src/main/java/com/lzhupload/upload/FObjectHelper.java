@@ -21,4 +21,7 @@ public interface FObjectHelper {
 	public boolean visitVerify(HttpServletRequest request,
 			HttpServletResponse response, FObject fobject);
 
+	
+	public boolean replace(HttpServletRequest request,
+			HttpServletResponse response, FObject fobject);
 }

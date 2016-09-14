@@ -180,11 +180,7 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 	}
 
 	
-	
-	
-	
-	
-	
+ 
 	public static String getFullUrl(HttpServletRequest request) {
 
 		StringBuffer url = new StringBuffer();

@@ -19,8 +19,7 @@ public class DebugFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
-		System.out
-				.println("请求的URL:" + getFullUrl((HttpServletRequest) request));
+		System.out.println("请求的URL:" + getFullUrl((HttpServletRequest) request));
 		printParameter(request, response);
 		filterChain.doFilter(request, response);
 		printAttribute(request, response);
