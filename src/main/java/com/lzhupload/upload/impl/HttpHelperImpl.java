@@ -85,6 +85,8 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 		}
 	}
 
+ 
+	
 	public void doSuccess(HttpServletResponse response, String dataType,
 			Object object, Exception e) {
 		response.setStatus(200);
@@ -146,6 +148,9 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 		String uploadPath = UploadInitImpl.getUpload()
 				.getProperty("uploadPath");
 		String fullPath = uploadPath + fobject.getFullPath();
+		
+		System.out.println("fullPath= "+fullPath);
+		
 		response.setHeader("Cache-Control", "max-age=10000000");
 		InputStream in = null;
 		OutputStream out = null;

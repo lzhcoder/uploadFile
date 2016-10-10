@@ -24,6 +24,9 @@
 		insert into
 		t_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note)
 		values(#vid#,now(),now(),#relativePath#,#fullPath#,#extName#,#origin#,#del#,#fileSize#,#note#)
+		<selectKey resultClass="java.lang.Long" keyProperty="id">
+	    	SELECT LAST_INSERT_ID() AS id 
+		</selectKey>
 	</insert>
 	<update id="modify" parameterClass="FObject">
 		update t_fileinfo set
