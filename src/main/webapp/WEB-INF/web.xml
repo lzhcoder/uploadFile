@@ -93,8 +93,8 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet>
-    <servlet-name>ReplaceFileServlet</servlet-name>
-    <servlet-class>com.lzhupload.upload.servlet.ReplaceFileServlet</servlet-class>
+    <servlet-name>ReplaceCopyFileServlet</servlet-name>
+    <servlet-class>com.lzhupload.upload.servlet.ReplaceCopyFileServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CopyFileServlet</servlet-name>
@@ -107,7 +107,7 @@
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ReplaceFileServlet</servlet-name>
+    <servlet-name>ReplaceCopyFileServlet</servlet-name>
     <url-pattern>/replaceFile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
