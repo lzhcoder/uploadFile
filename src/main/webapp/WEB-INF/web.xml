@@ -96,6 +96,11 @@
     <servlet-name>ReplaceFileServlet</servlet-name>
     <servlet-class>com.lzhupload.upload.servlet.ReplaceFileServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CopyFileServlet</servlet-name>
+    <servlet-class>com.lzhupload.upload.servlet.CopyFileServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>DownloadFileServlet</servlet-name>
@@ -104,5 +109,9 @@
   <servlet-mapping>
     <servlet-name>ReplaceFileServlet</servlet-name>
     <url-pattern>/replaceFile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CopyFileServlet</servlet-name>
+    <url-pattern>/copyFile</url-pattern>
   </servlet-mapping>
 </web-app>

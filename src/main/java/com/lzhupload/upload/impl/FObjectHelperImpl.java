@@ -1,6 +1,7 @@
 package com.lzhupload.upload.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Calendar;
@@ -9,12 +10,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.lzhupload.common.ibatis.BaseDao;
 import com.lzhupload.common.ibatis.DaoUtil;
 import com.lzhupload.common.impl.AESEncryptor;
+import com.lzhupload.common.impl.PropertiesUtil;
 import com.lzhupload.upload.FObjectHelper;
 import com.lzhupload.upload.HttpHelper;
 import com.lzhupload.upload.model.FObject;
@@ -162,6 +165,7 @@ public class FObjectHelperImpl implements FObjectHelper {
 			}
 			
 			createVid(fobject);
+			
 		} catch (Exception e) {
 			httpHelper.doError(response, "16", null);
 			return false;
@@ -255,9 +259,8 @@ public class FObjectHelperImpl implements FObjectHelper {
 	public boolean replace(HttpServletRequest request,
 			HttpServletResponse response, FObject fobject) {
 
-
 		try {
-			fobject = (FObject) dao.selectObject("fobject.queryForId",fobject);
+			 fobject = (FObject) dao.selectObject("fobject.queryForId",fobject);
 			
 			 String uploadPath = UploadInitImpl.getUpload().getProperty("uploadPath");
 			 String fileFullPath = uploadPath	+ fobject.getFullPath();
@@ -281,5 +284,71 @@ public class FObjectHelperImpl implements FObjectHelper {
 		
 
 	}
+	
+	public boolean copy(HttpServletRequest request,
+			HttpServletResponse response, FObject fobject) {
+		    Long id = new Long(0);
+		    try {
+				 //1设置参数
+				 FObject  f = (FObject) dao.selectObject("fobject.queryForId",fobject);
+				 BeanUtils.copyProperties(fobject, f);
+				 
+				 fobject.setOrigin(UploadInitImpl.getUpload().getProperty("origin"));
+				 String userName=(String) request.getAttribute("userName");
+				 if(!StringUtils.isEmpty(userName)){
+					
+					fobject.setRelativePath(userName+"/");
+					
+				 }else if(!StringUtils.isEmpty(request.getParameter("userName"))){
+					
+					userName=  request.getParameter("userName");
+					fobject.setRelativePath(userName+"/");
+				
+				 }
+				 createVid(fobject);
+                 fobject.setDel(new Long(0));
+                 fobject.setFullPath(fobject.getRelativePath() + fobject.getFileName());
+                 
+                 
+	             //2上传图片
+				 String uploadPath = UploadInitImpl.getUpload().getProperty("uploadPath");
+				 String fileFullPath = uploadPath	+ f.getFullPath();
+			     InputStream input  = new FileInputStream(fileFullPath);
+			     
+				 fileFullPath = uploadPath	+ fobject.getFullPath();
+			  	 File uploadFile = new File( uploadPath	+fobject.getRelativePath());
+				 if (!uploadFile.exists()) {
+					uploadFile.mkdirs();
+				 }
+			     FileOutputStream fos = new FileOutputStream(fileFullPath);  
+	
+			     int size = 0;  
+			     byte[] buffer = new byte[1024];  
+			     while ((size = input.read(buffer,0,1024)) != -1) {  
+			         fos.write(buffer, 0, size);  
+			     }  
+			     fos.close();  
+			     input.close();  
+		
+			     //3往文件表里插数据
+			     id = dao.insertSqlLong("fobject.add", fobject);
+			     
+			     
+			     //4对复制的文件进行重命名
+			     File oldfile=new File(fileFullPath); 
+		         File newfile=new File(uploadPath +fobject.getRelativePath()+id+"."+fobject.getExtName()); 
+			     oldfile.renameTo(newfile);
+			     fobject.setFullPath( fobject.getFullPath().substring(0, fobject.getFullPath().lastIndexOf("/")+1)+id+"."+fobject.getExtName());
+			     dao.updateSql("fobject.modifyForUpload",fobject);
+			     return true;
+			     
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+	   
+	}
+    
     
 }
