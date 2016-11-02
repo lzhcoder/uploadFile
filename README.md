@@ -1,4 +1,4 @@
-请访问：http://localhost/uploadFile/admin/index.html
+访问：http://localhost/uploadFile/
 
 情况一：先申请ID,后上传文件刚必须要携带两个参数以下的 id (之前申请的 )， origin （来源标示默认为A0，选填） 
 id:         *申请的ID 
@@ -77,4 +77,12 @@ http://localhost/uploadFile/download?vid=23A8EACE06AD5F4A4A1B933E0063E100BF652A8
       
     就这样，上传完成后就会执行callback函数，并传递服务端返回值。  
     按照该原理，可以轻松包装出一个ajax文件上传组件。  
+    
+  REST(Representational State Transfer)  based Web Service是相对于传统的Web Service(SOAP+WSDL+UDDI)而提出的。
+   传统的Web Service可以很好的解决异构系统之间的通信问题，但是需要首先定义好XML格式的合同(WSDL)，
+  client和server都必须严格遵守协议，不容易升级以及集群伸缩。REST Web Service不需要事先定义格式，
+   传输的内容也可以依据不同的client变化(json,xml,html等)， 最重要的是使用源URL来唯一定位资源，对资源的增删改查映射为HTTP的四个方法，
+   无状态传输，具有非常好的伸缩性。  
+    
+    输入http://localhost/uploadFile/rest/即可看到web service列表信息 
  

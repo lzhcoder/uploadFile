@@ -15,6 +15,28 @@
     <filter-name>DebugFilter</filter-name>
     <servlet-name>UploadFileServlet</servlet-name>
   </filter-mapping>
+  
+  <filter>
+    <filter-name>CharacterFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+ 
+  
   <context-param>
     <param-name>allowUploadFileType</param-name>
     <param-value>
@@ -37,7 +59,15 @@
     <param-name>success</param-name>
     <param-value>
 				conf/success/zh_CN.properties
-		</param-value>
+	 </param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+			classpath:META-INF/server/wink-core-context.xml,
+			classpath*:beans.xml,
+			classpath*:cms-spring-rest.xml
+	</param-value>
   </context-param>
   <listener>
     <listener-class>com.lzhupload.upload.impl.UploadInitImpl</listener-class>
@@ -93,8 +123,8 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet>
-    <servlet-name>ReplaceCopyFileServlet</servlet-name>
-    <servlet-class>com.lzhupload.upload.servlet.ReplaceCopyFileServlet</servlet-class>
+    <servlet-name>ReplaceFileServlet</servlet-name>
+    <servlet-class>com.lzhupload.upload.servlet.ReplaceFileServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>CopyFileServlet</servlet-name>
@@ -107,11 +137,23 @@
     <url-pattern>/download</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ReplaceCopyFileServlet</servlet-name>
+    <servlet-name>ReplaceFileServlet</servlet-name>
     <url-pattern>/replaceFile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>CopyFileServlet</servlet-name>
     <url-pattern>/copyFile</url-pattern>
   </servlet-mapping>
+  
+
+  
+  <servlet>
+    <servlet-name>restService</servlet-name>
+    <servlet-class>org.apache.wink.server.internal.servlet.RestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>restService</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
