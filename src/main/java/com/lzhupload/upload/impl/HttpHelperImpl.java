@@ -74,6 +74,7 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 			Map<String,Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("id", fobject.getId());
 			resultMap.put("vid", fobject.getVid());
+			resultMap.put("originName", fobject.getOriginName());
 			msg.setData(resultMap);
 
 //			msg.setData(String.format("{'id':%s,'vid':%s}", fobject

@@ -67,6 +67,7 @@ public class FileHelperImpl implements FileHelper {
 					.getAttribute("#FileItem#");
 			System.out.println("fineName:"+fileItemSave.getName());
 			System.out.println("fieldName:"+fileItemSave.getFieldName());
+			fobject.setOriginName(fileItemSave.getName());
 			fileItemSave.write(savedFile);
 		} catch (Exception e) {
 			httpHelper.doError(response, "17", e);

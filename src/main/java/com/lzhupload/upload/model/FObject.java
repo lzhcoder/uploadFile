@@ -1,6 +1,5 @@
 package com.lzhupload.upload.model;
-
-import java.util.Calendar;
+ 
 import java.util.Date;
 
 public class FObject {
@@ -24,6 +23,8 @@ public class FObject {
 
 	private String fullPath;
 
+	private String originName;
+	
 	private String userName;
 	
 	public Long getId() {
@@ -144,6 +145,15 @@ public class FObject {
 
 	public void setFullPath(String fullPath) {
 		this.fullPath = fullPath;
+	}
+
+ 
+	public String getOriginName() {
+		return originName;
+	}
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
 	}
 
 	public String getUserName() {

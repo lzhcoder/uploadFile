@@ -1,4 +1,4 @@
 eclipse.preferences.version=1
-validator.Checked=src/main/webapp/jquery-1.6.min.js,src/main/webapp/admin/jquery-1.6.min.js
+validator.Checked=src/main/webapp/resources/js/jquery-1.7.2.min.js
 validator.Revalidate=true
 validator.Unchecked=

@@ -14,23 +14,24 @@
 		<result column="del" property="del" />
 		<result column="fileSize" property="fileSize" />
 		<result column="note" property="note" />
+		<result column="originName" property="originName" />
 	</resultMap>
 	<select id="query" parameterClass="FObject" resultMap="FObjectRB">
 		select
-		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
+		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note,originName
 		from t_fileinfo
 	</select>
 	<insert id="add" parameterClass="FObject">
 		insert into
-		t_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note)
-		values(#vid#,now(),now(),#relativePath#,#fullPath#,#extName#,#origin#,#del#,#fileSize#,#note#)
+		t_fileinfo(Vid,Registerdate,Uploaddate,Relativepath,fullPath,Extname,Origin,Del,Filesize,Note,originName)
+		values(#vid#,now(),now(),#relativePath#,#fullPath#,#extName#,#origin#,#del#,#fileSize#,#note#,#originName#)
 		<selectKey resultClass="java.lang.Long" keyProperty="id">
 	    	SELECT LAST_INSERT_ID() AS id 
 		</selectKey>
 	</insert>
 	<update id="modify" parameterClass="FObject">
 		update t_fileinfo set
-		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
+		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#,originName=#originName#
 		where Id=#id#
 	</update>
 	<delete id="remove" parameterClass="FObject">
@@ -41,7 +42,7 @@
 
 	<select id="queryForId" parameterClass="FObject" resultClass="FObject" >
 		select
-		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note
+		id,vid,registerDate,uploadDate,relativePath,fullPath,extName,origin,del,fileSize,note,originName
 		from t_fileinfo
 		where (del &lt;&gt; 1 or del is null) and id=#id#
 	</select>
@@ -55,7 +56,7 @@
 	</insert>
 	<update id="modifyForUpload" parameterClass="FObject">
 		update t_fileinfo set
-		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#
+		Vid=#vid#,Uploaddate=now(),Relativepath=#relativePath#,fullPath=#fullPath#,Extname=#extName#,Origin=#origin#,Del=#del#,Filesize=#fileSize#,Note=#note#,originName=#originName#
 		where Id=#id#
 	</update>
 
