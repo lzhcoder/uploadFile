@@ -1,7 +1,4 @@
-https://github.com/lzhcoder/uploadFile/blob/master/src/main/webapp/upload/1.png
-https://github.com/lzhcoder/uploadFile/blob/master/src/main/webapp/upload/2.png
-
-
+ 
 
 访问：http://localhost/uploadFile/
 
