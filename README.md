@@ -1,3 +1,8 @@
+https://github.com/lzhcoder/uploadFile/blob/master/src/main/webapp/upload/1.png
+https://github.com/lzhcoder/uploadFile/blob/master/src/main/webapp/upload/2.png
+
+
+
 访问：http://localhost/uploadFile/
 
 情况一：先申请ID,后上传文件刚必须要携带两个参数以下的 id (之前申请的 )， origin （来源标示默认为A0，选填） 
