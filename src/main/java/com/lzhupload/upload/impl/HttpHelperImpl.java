@@ -107,7 +107,7 @@ public class HttpHelperImpl extends HttpUtils implements HttpHelper {
 			HttpServletResponse response, FObject fobject) {
 		String uploadPath = UploadInitImpl.getUpload()
 				.getProperty("uploadPath");
-		String fileName = fobject.getFileName();
+		String fileName = fobject.getOriginName();
  
 		String fullPath = uploadPath + fobject.getFullPath();
 		try {
